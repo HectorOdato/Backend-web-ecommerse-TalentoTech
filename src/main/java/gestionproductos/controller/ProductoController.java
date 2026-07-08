@@ -37,4 +37,9 @@ public class ProductoController {
     public void eliminarProducto(@PathVariable String id) {
         productoService.eliminarProducto(id);
     }
+
+    @PutMapping("/{id}")
+    public Producto actualizarProducto(@PathVariable String id, @Valid @RequestBody Producto productoActualizado) {
+        return productoService.actualizarProducto(id, productoActualizado);
+    }
 }

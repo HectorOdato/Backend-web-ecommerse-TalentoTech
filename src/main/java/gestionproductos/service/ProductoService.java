@@ -31,4 +31,17 @@ public class ProductoService {
     public void eliminarProducto(String id) {
         productoRepository.deleteById(id);
     }
+
+    public Producto actualizarProducto(String id, Producto productoActualizado) {
+
+        Producto producto = productoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+
+        producto.setNombre(productoActualizado.getNombre());
+        producto.setDescripcion(productoActualizado.getDescripcion());
+        producto.setPrecio(productoActualizado.getPrecio());
+        producto.setStock(productoActualizado.getStock());
+
+        return productoRepository.save(producto);
+    }
 }
