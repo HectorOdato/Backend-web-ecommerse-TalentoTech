@@ -26,4 +26,14 @@ public class ProductoController {
     public Producto guardarProducto(@RequestBody Producto producto) {
         return productoService.guardarProducto(producto);
     }
+
+    @GetMapping("/{id}")
+    public Producto buscarPorId(@PathVariable String id) {
+        return productoService.buscarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarProducto(@PathVariable String id) {
+        productoService.eliminarProducto(id);
+    }
 }
