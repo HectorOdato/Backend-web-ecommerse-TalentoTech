@@ -10,4 +10,6 @@ public class GestionproductosApplication {
 		SpringApplication.run(GestionproductosApplication.class, args);
 	}
 
+	
+
 }
