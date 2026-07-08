@@ -1,11 +1,11 @@
-package com.leo.gestionproductos.service;
+package gestionproductos.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.leo.gestionproductos.model.Producto;
-import com.leo.gestionproductos.repository.ProductoRepository;
+import gestionproductos.model.Producto;
+import gestionproductos.repository.ProductoRepository;
 
 @Service
 public class ProductoService {

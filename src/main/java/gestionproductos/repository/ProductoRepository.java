@@ -1,7 +1,7 @@
-package com.leo.gestionproductos.repository;
+package gestionproductos.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import com.leo.gestionproductos.model.Producto;
+import gestionproductos.model.Producto;
 
 public interface ProductoRepository extends MongoRepository<Producto, String> {
 

@@ -1,11 +1,11 @@
-package com.leo.gestionproductos.controller;
+package gestionproductos.controller;
 
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.leo.gestionproductos.model.Producto;
-import com.leo.gestionproductos.service.ProductoService;
+import gestionproductos.model.Producto;
+import gestionproductos.service.ProductoService;
 
 @RestController
 @RequestMapping("/productos")
