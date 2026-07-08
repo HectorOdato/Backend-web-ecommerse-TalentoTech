@@ -2,14 +2,29 @@ package gestionproductos.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "productos")
 public class Producto {
     @Id
     private String id;
+
+    @NotBlank(message = "La descripción no puede estar vacía.")
     private String descripcion;
+
+    @NotBlank(message = "El nombre es obligatorio.")
     private String nombre;
+
+    @NotNull(message = "por favor ingrese un precio.")
+    @Min(value = 0, message = "El precio no puede ser negativo.")
     private double precio;
+
+    @NotNull(message = "el stock es obligatorio.")
+    @Min(value = 0, message = "El stock no puede ser negativo.")
     private int stock;
 
 public Producto() {
