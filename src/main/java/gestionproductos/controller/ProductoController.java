@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import gestionproductos.model.Producto;
 import gestionproductos.service.ProductoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/productos")
@@ -23,7 +24,7 @@ public class ProductoController {
     }
 
     @PostMapping
-    public Producto guardarProducto(@RequestBody Producto producto) {
+    public Producto guardarProducto(@Valid @RequestBody Producto producto) {
         return productoService.guardarProducto(producto);
     }
 
