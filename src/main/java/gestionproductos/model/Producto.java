@@ -2,6 +2,7 @@ package gestionproductos.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,17 +20,17 @@ public class Producto {
     private String nombre;
 
     @NotNull(message = "por favor ingrese un precio.")
-    @Min(value = 0, message = "El precio no puede ser negativo.")
-    private double precio;
+    @DecimalMin(value = "0.0", message = "El precio no puede ser negativo.")
+    private Double precio;
 
     @NotNull(message = "el stock es obligatorio.")
     @Min(value = 0, message = "El stock no puede ser negativo.")
-    private int stock;
+    private Integer stock;
 
 public Producto() {
 }
 
-public Producto(String descripcion, String nombre, double precio, int stock) {
+public Producto(String descripcion, String nombre, Double precio, Integer stock) {
 
     setDescripcion(descripcion);
     setNombre(nombre);
@@ -49,10 +50,7 @@ public Producto(String descripcion, String nombre, double precio, int stock) {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
-        if (descripcion == null || descripcion.trim().isEmpty()) {
-            throw new IllegalArgumentException("La descripción no puede estar vacía.");
-        }
+    public void setDescripcion(String descripcion) {        
         this.descripcion = descripcion;
     }
 
@@ -61,31 +59,22 @@ public Producto(String descripcion, String nombre, double precio, int stock) {
     }
 
     public void setNombre(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
-            throw new IllegalArgumentException("El nombre no puede estar vacío.");
-        }
         this.nombre = nombre;
     }
 
-    public double getPrecio() {
+    public Double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(double precio) {
-        if (precio < 0) {
-            throw new IllegalArgumentException("El precio no puede ser negativo.");
-        }
+    public void setPrecio(Double precio) {
         this.precio = precio;
     }
 
-    public int getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
-        if (stock < 0) {
-            throw new IllegalArgumentException("El stock no puede ser negativo.");
-        }
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 

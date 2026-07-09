@@ -22,9 +22,9 @@ public class Pedido {
         lineas.add(linea);
     }
 
-    public Double calcularTotal() {
+    public double calcularTotal() {
 
-        Double total = 0.0;
+        double total = 0;
 
         for (LineaPedido linea : lineas) {
             total += linea.calcularSubtotal();
