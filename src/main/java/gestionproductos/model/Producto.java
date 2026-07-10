@@ -30,6 +30,8 @@ public class Producto {
     @Min(value = 0, message = "El stock no puede ser negativo.")
     private Integer stock;
 
+    private Categoria categoria;
+
 public Producto() {
 }
 
@@ -91,6 +93,14 @@ public Producto(String descripcion, String imagen, String nombre, Double precio,
         this.stock = stock;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString() {
         return "ID: " + id +
@@ -98,6 +108,7 @@ public Producto(String descripcion, String imagen, String nombre, Double precio,
                 " | Descripcion: " + descripcion +
                 " | Imagen: " + imagen +
                 " | Precio: $" + precio +
-                " | Stock: " + stock;
+                " | Stock: " + stock +
+                " | Categoría: " + categoria;
     }
 }
