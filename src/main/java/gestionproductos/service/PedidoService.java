@@ -44,7 +44,13 @@ public class PedidoService {
 
             linea.setProducto(productoDB);
         }
-
         return pedidoRepository.save(pedido);
+    }
+
+    public Pedido eliminarPedido(String id) {
+        Pedido pedido = pedidoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + id));
+        pedidoRepository.delete(pedido);
+        return pedido;
     }
 }

@@ -25,4 +25,9 @@ public class PedidoController {
     public Pedido crearPedido(@Valid @RequestBody Pedido pedido) {
         return pedidoService.crearPedido(pedido);
     }
+
+    @DeleteMapping("/{id}")
+    public Pedido eliminarPedido(@PathVariable String id) {
+        return pedidoService.eliminarPedido(id);
+    }
 }
