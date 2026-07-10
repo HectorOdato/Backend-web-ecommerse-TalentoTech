@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // 1. Maneja cuando no encontramos un producto, categoría, etc. (Error 404)
+    // Aca manejo todos los errores de tipo 404 y 400 y errores inesperados como los 500.
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> manejarResourceNotFound(ResourceNotFoundException ex) {
         ErrorResponse error = new ErrorResponse(
@@ -23,10 +23,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    // 2. Maneja los errores de validación de los @NotBlank, @NotNull, @Min (Error 400)
+    // Aca se gestionan los errores de validaciones de datos como @Valid, @NotNull ect de productos y categorias
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> manejarValidaciones(MethodArgumentNotValidException ex) {
-        // Extraemos todos los mensajes de error de los campos que fallaron
+
         List<String> detalles = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -35,18 +35,18 @@ public class GlobalExceptionHandler {
 
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.BAD_REQUEST.value(),
-                "Error en la validación de los datos",
+                "Error en la validación de los datos del producto o categoría",
                 detalles
         );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // 3. Maneja cualquier otro error general para que la app no explote (Error 500)
+    // Gestion de errores inesperados 500, base de datos, errores de servidor, etc
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> manejarExcepcionGeneral(Exception ex) {
         ErrorResponse error = new ErrorResponse(
                 HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                "Ocurrió un error inesperado en el servidor",
+                "Ocurrió un error inesperado en el servidor contacte al administrador",
                 List.of(ex.getMessage())
         );
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);

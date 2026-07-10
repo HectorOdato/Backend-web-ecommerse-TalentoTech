@@ -12,6 +12,7 @@ public class Categoria {
     @NotBlank(message = "El nombre de la categoría no puede estar vacío.")
     private String nombre;
 
+    @NotBlank(message = "La descripción de la categoría no puede estar vacía.")
     private String descripcion;
 
     public Categoria() {
