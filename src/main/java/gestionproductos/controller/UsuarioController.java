@@ -29,6 +29,11 @@ public class UsuarioController {
         return usuarioService.listarUsuarios();
     }
 
+    @DeleteMapping("/{id}")
+    public Usuario eliminarUsuario(@PathVariable String id) {
+        return usuarioService.eliminarUsuario(id);
+    }
+
     @GetMapping("/{usuarioId}/pedidos")
     public List<Pedido> obtenerPedidosDeUsuario(@PathVariable String usuarioId) {
         usuarioService.buscarPorId(usuarioId); 
