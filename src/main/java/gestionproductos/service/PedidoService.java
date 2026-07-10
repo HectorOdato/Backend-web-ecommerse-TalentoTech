@@ -1,5 +1,6 @@
 package gestionproductos.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import gestionproductos.model.LineaPedido;
@@ -28,8 +29,14 @@ public class PedidoService {
         return pedidoRepository.findByUsuarioId(usuarioId);
     }
 
-    public Pedido crearPedido(Pedido pedido) {
-        for (LineaPedido linea : pedido.getLineas()) {
+    public Pedido crearPedido(Pedido nuevoPedido) {
+        for (LineaPedido linea : nuevoPedido.getLineas()) {
+
+            nuevoPedido.setFechaCreacion(LocalDateTime.now());
+            nuevoPedido.setEstado("PENDIENTE");
+
+            String numeroPedido = "PED-" + System.currentTimeMillis();
+            nuevoPedido.setNumeroPedido(numeroPedido);
 
             Producto productoDB = productoRepository.findById(linea.getProducto().getId())
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + linea.getProducto().getId()));
@@ -44,7 +51,7 @@ public class PedidoService {
 
             linea.setProducto(productoDB);
         }
-        return pedidoRepository.save(pedido);
+        return pedidoRepository.save(nuevoPedido);
     }
 
     public Pedido eliminarPedido(String id) {

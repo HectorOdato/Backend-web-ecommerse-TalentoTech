@@ -22,8 +22,8 @@ public class PedidoController {
     }
 
     @PostMapping
-    public Pedido crearPedido(@Valid @RequestBody Pedido pedido) {
-        return pedidoService.crearPedido(pedido);
+    public Pedido crearPedido(@Valid @RequestBody Pedido nuevoPedido) {
+        return pedidoService.crearPedido(nuevoPedido);
     }
 
     @DeleteMapping("/{id}")

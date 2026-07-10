@@ -19,8 +19,6 @@ public class Pedido {
     
     public Pedido() {
         this.lineas = new ArrayList<>();
-        this.fechaCreacion = LocalDateTime.now(); 
-        this.estado = "PENDIENTE";
     }
 
 
