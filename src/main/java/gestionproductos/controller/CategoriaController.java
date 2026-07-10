@@ -24,4 +24,19 @@ public class CategoriaController {
     public Categoria guardarCategoria(@Valid @RequestBody Categoria categoria) {
         return categoriaService.guardarCategoria(categoria);
     }
+
+    @GetMapping("/{id}")
+    public Categoria buscarPorId(@PathVariable String id) {
+        return categoriaService.buscarPorId(id);
+    }
+
+    @DeleteMapping("/{id}")
+    public void eliminarCategoria(@PathVariable String id) {
+        categoriaService.eliminarCategoria(id);
+    }
+
+    @PutMapping("/{id}")
+    public Categoria actualizarCategoria(@PathVariable String id, @Valid @RequestBody Categoria categoriaActualizada) {
+        return categoriaService.actualizarCategoria(id, categoriaActualizada);
+    }
 }
