@@ -24,6 +24,10 @@ public class PedidoService {
         return pedidoRepository.findAll();
     }
 
+    public List<Pedido> obtenerPedidosPorUsuario(String usuarioId) {
+        return pedidoRepository.findByUsuarioId(usuarioId);
+    }
+
     public Pedido crearPedido(Pedido pedido) {
         for (LineaPedido linea : pedido.getLineas()) {
 
