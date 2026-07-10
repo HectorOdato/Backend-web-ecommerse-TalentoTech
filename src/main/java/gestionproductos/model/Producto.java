@@ -1,23 +1,28 @@
 package gestionproductos.model;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;  
 
+
+@JsonPropertyOrder({
+    "id",
+    "nombre",
+    "precio",
+    "stock",
+    "descripcion",
+    "imagenURL",
+    "categoria"
+})
 
 @Document(collection = "productos")
 public class Producto {
     @Id
     private String id;
-
-    @NotBlank(message = "La descripción no puede estar vacía.")
-    private String descripcion;
-
-    @NotBlank(message = "La imagen no puede estar vacía.")
-    private String imagen;
 
     @NotBlank(message = "El nombre es obligatorio.")
     private String nombre;
@@ -30,18 +35,25 @@ public class Producto {
     @Min(value = 0, message = "El stock no puede ser negativo.")
     private Integer stock;
 
+    @NotBlank(message = "La descripción no puede estar vacía.")
+    private String descripcion;
+
+    @NotBlank(message = "La imagen no puede estar vacía.")
+    private String imagenURL;
+
     private Categoria categoria;
 
 public Producto() {
 }
 
-public Producto(String descripcion, String imagen, String nombre, Double precio, Integer stock) {
+public Producto(String descripcion, String imagenURL, String nombre, Double precio, Integer stock) {
 
-    setDescripcion(descripcion);
-    setImagen(imagen);
     setNombre(nombre);
     setPrecio(precio);
     setStock(stock);
+    setDescripcion(descripcion);
+    setImagenURL(imagenURL);
+
 }
 
     public String getId() {
@@ -52,22 +64,7 @@ public Producto(String descripcion, String imagen, String nombre, Double precio,
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
-    public void setDescripcion(String descripcion) {        
-        this.descripcion = descripcion;
-    }
-
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
 
     public String getNombre() {
         return nombre;
@@ -93,6 +90,23 @@ public Producto(String descripcion, String imagen, String nombre, Double precio,
         this.stock = stock;
     }
 
+        public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {        
+        this.descripcion = descripcion;
+    }
+
+
+    public String getImagenURL() {
+        return imagenURL;
+    }
+
+    public void setImagenURL(String imagenURL) {
+        this.imagenURL = imagenURL;
+    }
+
     public Categoria getCategoria() {
         return categoria;
     }
@@ -105,10 +119,10 @@ public Producto(String descripcion, String imagen, String nombre, Double precio,
     public String toString() {
         return "ID: " + id +
                 " | Nombre: " + nombre +
-                " | Descripcion: " + descripcion +
-                " | Imagen: " + imagen +
                 " | Precio: $" + precio +
                 " | Stock: " + stock +
+                " | Descripcion: " + descripcion +
+                " | Imagen: " + imagenURL +
                 " | Categoría: " + categoria;
     }
 }

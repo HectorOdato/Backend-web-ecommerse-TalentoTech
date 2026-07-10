@@ -5,15 +5,19 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import gestionproductos.model.Producto;
+import gestionproductos.model.Categoria;
 import gestionproductos.repository.ProductoRepository;
+import gestionproductos.repository.CategoriaRepository;
 
 @Service
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    public ProductoService(ProductoRepository productoRepository) {
+    public ProductoService(ProductoRepository productoRepository, CategoriaRepository categoriaRepository) {
         this.productoRepository = productoRepository;
+        this.categoriaRepository = categoriaRepository;
     }
 
     public List<Producto> listarProductos() {
@@ -21,6 +25,10 @@ public class ProductoService {
     }
 
     public Producto guardarProducto(Producto producto) {
+        Categoria categoria = categoriaRepository.findById(producto.getCategoria().getId())
+            .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + producto.getCategoria().getId()));
+
+        producto.setCategoria(categoria);
         return productoRepository.save(producto);
     }
 
@@ -39,9 +47,15 @@ public class ProductoService {
 
         producto.setNombre(productoActualizado.getNombre());
         producto.setDescripcion(productoActualizado.getDescripcion());
-        producto.setImagen(productoActualizado.getImagen());
+        producto.setImagenURL(productoActualizado.getImagenURL());
         producto.setPrecio(productoActualizado.getPrecio());
         producto.setStock(productoActualizado.getStock());
+
+        if (productoActualizado.getCategoria() != null) {
+            Categoria categoria = categoriaRepository.findById(productoActualizado.getCategoria().getId())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + productoActualizado.getCategoria().getId()));
+            producto.setCategoria(categoria);
+        }
 
         return productoRepository.save(producto);
     }
