@@ -27,7 +27,7 @@ public class ProductoService {
 
     public Producto guardarProducto(Producto producto) {
         Categoria categoria = categoriaRepository.findById(producto.getCategoria().getId())
-            .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + producto.getCategoria().getId()));
+            .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + producto.getCategoria().getId()));
 
         producto.setCategoria(categoria);
         return productoRepository.save(producto);

@@ -8,6 +8,8 @@ import gestionproductos.model.Pedido;
 import gestionproductos.model.Producto;
 import gestionproductos.repository.PedidoRepository;
 import gestionproductos.repository.ProductoRepository;
+import gestionproductos.exception.ResourceNotFoundException;
+import gestionproductos.exception.StockInsuficienteException;
 
 @Service
 public class PedidoService {
@@ -39,11 +41,11 @@ public class PedidoService {
             nuevoPedido.setNumeroPedido(numeroPedido);
 
             Producto productoDB = productoRepository.findById(linea.getProducto().getId())
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado con ID: " + linea.getProducto().getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado con ID: " + linea.getProducto().getId()));
 
 
             if (productoDB.getStock() < linea.getCantidad()) {
-                throw new RuntimeException("Stock insuficiente para el producto: " + productoDB.getNombre());
+                throw new StockInsuficienteException("Stock insuficiente para el producto: " + productoDB.getNombre());
             }
 
             productoDB.setStock(productoDB.getStock() - linea.getCantidad());
@@ -56,7 +58,7 @@ public class PedidoService {
 
     public Pedido eliminarPedido(String id) {
         Pedido pedido = pedidoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Pedido no encontrado con ID: " + id));
+            .orElseThrow(() -> new ResourceNotFoundException("Pedido no encontrado con ID: " + id));
         pedidoRepository.delete(pedido);
         return pedido;
     }
