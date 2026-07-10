@@ -26,4 +26,10 @@ public class UsuarioService {
         return usuarioRepository.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Usuario no encontrado con ID: " + id));
     }
+
+    public Usuario eliminarUsuario(String id) {
+        Usuario usuario = buscarPorId(id);
+        usuarioRepository.delete(usuario);
+        return usuario;
+    }
 }
