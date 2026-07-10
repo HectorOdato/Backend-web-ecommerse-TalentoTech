@@ -16,6 +16,9 @@ public class Producto {
     @NotBlank(message = "La descripción no puede estar vacía.")
     private String descripcion;
 
+    @NotBlank(message = "La imagen no puede estar vacía.")
+    private String imagen;
+
     @NotBlank(message = "El nombre es obligatorio.")
     private String nombre;
 
@@ -30,9 +33,10 @@ public class Producto {
 public Producto() {
 }
 
-public Producto(String descripcion, String nombre, Double precio, Integer stock) {
+public Producto(String descripcion, String imagen, String nombre, Double precio, Integer stock) {
 
     setDescripcion(descripcion);
+    setImagen(imagen);
     setNombre(nombre);
     setPrecio(precio);
     setStock(stock);
@@ -52,6 +56,15 @@ public Producto(String descripcion, String nombre, Double precio, Integer stock)
 
     public void setDescripcion(String descripcion) {        
         this.descripcion = descripcion;
+    }
+
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 
     public String getNombre() {
@@ -83,6 +96,7 @@ public Producto(String descripcion, String nombre, Double precio, Integer stock)
         return "ID: " + id +
                 " | Nombre: " + nombre +
                 " | Descripcion: " + descripcion +
+                " | Imagen: " + imagen +
                 " | Precio: $" + precio +
                 " | Stock: " + stock;
     }

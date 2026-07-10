@@ -39,6 +39,7 @@ public class ProductoService {
 
         producto.setNombre(productoActualizado.getNombre());
         producto.setDescripcion(productoActualizado.getDescripcion());
+        producto.setImagen(productoActualizado.getImagen());
         producto.setPrecio(productoActualizado.getPrecio());
         producto.setStock(productoActualizado.getStock());
 
