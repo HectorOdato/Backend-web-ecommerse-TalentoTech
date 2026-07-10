@@ -8,6 +8,7 @@ import gestionproductos.model.Producto;
 import gestionproductos.model.Categoria;
 import gestionproductos.repository.ProductoRepository;
 import gestionproductos.repository.CategoriaRepository;
+import gestionproductos.exception.ResourceNotFoundException;
 
 @Service
 public class ProductoService {
@@ -33,7 +34,7 @@ public class ProductoService {
     }
 
     public Producto buscarPorId(String id) {
-        return productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Este prodcuto no se encuentra: " + id));
+        return productoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Este prodcuto no se encuentra: " + id));
     }
 
     public void eliminarProducto(String id) {
@@ -43,7 +44,7 @@ public class ProductoService {
     public Producto actualizarProducto(String id, Producto productoActualizado) {
 
         Producto producto = productoRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+            .orElseThrow(() -> new ResourceNotFoundException("Producto no encontrado"));
 
         producto.setNombre(productoActualizado.getNombre());
         producto.setDescripcion(productoActualizado.getDescripcion());
@@ -53,7 +54,7 @@ public class ProductoService {
 
         if (productoActualizado.getCategoria() != null) {
             Categoria categoria = categoriaRepository.findById(productoActualizado.getCategoria().getId())
-                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + productoActualizado.getCategoria().getId()));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + productoActualizado.getCategoria().getId()));
             producto.setCategoria(categoria);
         }
 
