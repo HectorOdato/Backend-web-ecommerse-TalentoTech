@@ -13,15 +13,15 @@ public class Usuario {
     @NotBlank(message = "El nombre de usuario no puede estar vacío.")
     private String nombreUsuario;
 
-    @NotBlank(message = "El mail es obligatorio.")
-    private String mail;
+    @NotBlank(message = "La contraseña no puede estar vacía.")
+    private String contrasena;
 
     public Usuario() {
     }
 
-    public Usuario(String nombreUsuario, String mail) {
+    public Usuario(String nombreUsuario, String contrasena) {
         this.nombreUsuario = nombreUsuario;
-        this.mail = mail;
+        this.contrasena = contrasena;
     }
 
     public String getId() {
@@ -40,11 +40,11 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public String getMail() {
-        return mail;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }
