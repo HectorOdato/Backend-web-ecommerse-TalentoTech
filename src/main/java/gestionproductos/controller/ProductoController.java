@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import gestionproductos.model.Producto;
 import gestionproductos.service.ProductoService;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RestController
 @RequestMapping("/productos")
@@ -31,6 +34,11 @@ public class ProductoController {
     @GetMapping("/{id}")
     public Producto buscarPorId(@PathVariable String id) {
         return productoService.buscarPorId(id);
+    }
+
+    @GetMapping("/categoria/{categoriaId}")
+    public List<Producto> obtenerPorCategoria(@PathVariable String categoriaId) {
+        return productoService.obtenerPorCategoria(categoriaId);
     }
 
     @DeleteMapping("/{id}")

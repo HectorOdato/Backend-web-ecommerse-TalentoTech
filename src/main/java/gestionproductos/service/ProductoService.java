@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import gestionproductos.model.Producto;
 import gestionproductos.model.Categoria;
 import gestionproductos.repository.ProductoRepository;
+import java.util.stream.Collectors;
 import gestionproductos.repository.CategoriaRepository;
 import gestionproductos.exception.ResourceNotFoundException;
 
@@ -37,6 +38,12 @@ public class ProductoService {
         return productoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Este prodcuto no se encuentra: " + id));
     }
 
+    public List<Producto> obtenerPorCategoria(String categoriaId) {
+    categoriaRepository.findById(categoriaId)
+        .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + categoriaId));
+    return productoRepository.findByCategoria_Id(categoriaId);
+    }
+    
     public void eliminarProducto(String id) {
         productoRepository.deleteById(id);
     }
